@@ -16,7 +16,15 @@ app.get('/',(req,res)=>{
 
 app.post("/test",(req,res)=>{
     const testID = req.body.testID;
+
     console.log(testID);
+
+    const sendText = {
+        text:'ok',
+    }
+
+    res.send(sendText);
+    
 })
 
 app.listen(port, ()=>{
