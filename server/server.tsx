@@ -10,6 +10,7 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
 app.use(cors());
 
+
 app.get('/',(req,res)=>{
     res.send('test');
 })
@@ -30,3 +31,15 @@ app.post("/test",(req,res)=>{
 app.listen(port, ()=>{
     console.log('Connect success');
 })
+
+const mongoose = require('mongoose');
+
+mongoose
+    .connect(
+        'mongodb://localhost:27017'
+    ).then(()=>{
+        console.log('mongodb connected')
+    })
+    .catch((err)=>{
+        console.log(err);
+    })
