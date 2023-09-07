@@ -1,5 +1,5 @@
 import { useState } from "react";
-import {Register} from './component/Register';
+import Register from "./component/Register";
 
 function App() {
   // const [id, setId] = useState('');
