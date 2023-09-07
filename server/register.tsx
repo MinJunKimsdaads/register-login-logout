@@ -10,26 +10,19 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
 app.use(cors());
 
+app.post("/register",(req,res)=>{
+    const testID = req.body.testID;
 
-app.post("/register",(req,res,next)=>{
+    console.log(testID);
 
-    console.log(req.body)
-    
+    const sendText = {
+        text:'ok1111',
+    }
+
+    res.send(sendText);
     
 })
 
 app.listen(port, ()=>{
     console.log('Connect success');
 })
-
-const mongoose = require('mongoose');
-
-mongoose
-    .connect(
-        'mongodb://localhost:27017'
-    ).then(()=>{
-        console.log('mongodb connected')
-    })
-    .catch((err)=>{
-        console.log(err);
-    })
