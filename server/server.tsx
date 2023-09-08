@@ -3,27 +3,45 @@ const app = express();
 const port = 3001;
 const mongoose = require('mongoose');
 
-mongoose
-    .connect(
-        'mongodb://localhost:27017'
-    ).then(()=>{
-        console.log('mongodb connected')
-    })
-    .catch((err)=>{
-        console.log(err);
-    })
+const crypto1 = require('crypto');
 
-const student = mongoose.Schema({
-    name : 'string',
-    address : 'string',
-    age : 'number'
-}); 
+// const testPassword = crypto1.createHash('sha512').update('alswns123!').digest('base64');
 
-var Student = mongoose.model('Schema', student);
+// crypto1.randomBytes(64, (err, buf) => {
+//     crypto1.pbkdf2('alswns123!', buf.toString('base64'), 100000, 64, 'sha512', (err, key) => {
+//         console.log(key.toString('base64')); // 'dWhPkH6c4X1Y71A/DrAHhML3DyKQdEkUOIaSmYCI7xZkD5bLZhPF0dOSs2YZA/Y4B8XNfWd3DHIqR5234RtHzw=='
+//         console.log(buf.toString('base64'));
+//     });
+// });
 
-var newStudent = new Student({name:'Hong Gil Dong', address:'서울시 강남구 논현동', age:'22'});
+//조회 -> 아이디 중복 체크 후 저장
+//패스워드 암호화 필요
+// mongoose
+//     .connect(
+//         'mongodb://localhost:27017'
+//     ).then(()=>{
+//         console.log('mongodb connected')
+//     })
+//     .catch((err)=>{
+//         console.log(err);
+//     })
 
-newStudent.save();
+// const userInfo = mongoose.Schema({
+//     ID : 'string',
+//     password : 'string',
+// });
+
+
+
+// var UserInfo = mongoose.model('Schema', userInfo);
+
+// UserInfo.find({ID: 'admin'}).then((docs) => {
+//     console.log(docs); //아이디 중복 확인
+// })
+
+// var newUserInfo = new UserInfo({ID:'Hong Gil Dong', password:'서울시 강남구 논현동'});
+
+// newUserInfo.save();
 
 
 // const cors = require("cors");
@@ -43,5 +61,22 @@ newStudent.save();
 // })
 
 app.listen(port, ()=>{
-    console.log('Connect success');
+    // crypto1.randomBytes(64, (err, buf) => {
+    //     crypto1.pbkdf2('alswns123!', buf.toString('base64'), 100000, 64, 'sha512', (err, key) => {
+    //         console.log(key.toString('base64')); // 'dWhPkH6c4X1Y71A/DrAHhML3DyKQdEkUOIaSmYCI7xZkD5bLZhPF0dOSs2YZA/Y4B8XNfWd3DHIqR5234RtHzw=='
+    //         console.log(buf.toString('base64'));
+    //     });
+    // });
+
+    crypto1.pbkdf2('alswns123!', 'PN11bE2pZxeEd6GAMppnhj/QGeAWPpFdu8pfA3VdKQDfCY5KhVZg5XHCgnFVTUK7TjXyFAmvskYewc8jzw05jg==', 100000, 64, 'sha512', (err, key) => {
+        console.log(key.toString('base64'));
+    });
+
+    
 })
+
+
+//1. 서버가 패스워드를 받아서 64자리 salt생성
+//2. salt로 패스워드를 키로 제작
+//3. salt랑 key를 함께 저장
+//4. 로그인 시 패스워드와 저장된 salt를 이용해 key제작 후 비교
