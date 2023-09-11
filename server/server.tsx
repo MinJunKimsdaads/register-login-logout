@@ -3,6 +3,14 @@ const app = express();
 const port = 3001;
 const mongoose = require('mongoose');
 
+const cors = require("cors");
+const bodyParser = require('body-parser');
+
+app.use(bodyParser.urlencoded({extended:true}));
+//extended 옵션의 경우, true일 경우, 객체 형태로 전달된 데이터내에서 또다른 중첩된 객체를 허용한다는 말이며, false인 경우에는 허용하지 않는 의미
+app.use(bodyParser.json());
+app.use(cors());
+
 const crypto1 = require('crypto');
 
 // const testPassword = crypto1.createHash('sha512').update('alswns123!').digest('base64');
@@ -16,22 +24,28 @@ const crypto1 = require('crypto');
 
 //조회 -> 아이디 중복 체크 후 저장
 //패스워드 암호화 필요
-// mongoose
-//     .connect(
-//         'mongodb://localhost:27017'
-//     ).then(()=>{
-//         console.log('mongodb connected')
-//     })
-//     .catch((err)=>{
-//         console.log(err);
-//     })
+mongoose
+    .connect(
+        'mongodb://localhost:27017'
+    ).then(()=>{
+        console.log('mongodb connected')
+    })
+    .catch((err)=>{
+        console.log(err);
+    })
+
+const userInfo = mongoose.Schema({
+    ID : 'string',
+    password : 'string',
+});
+
+var UserInfo = mongoose.model('Schema', userInfo);
+
 
 // const userInfo = mongoose.Schema({
 //     ID : 'string',
 //     password : 'string',
 // });
-
-
 
 // var UserInfo = mongoose.model('Schema', userInfo);
 
@@ -43,22 +57,16 @@ const crypto1 = require('crypto');
 
 // newUserInfo.save();
 
+app.post("/register",(req,res,next)=>{
 
-// const cors = require("cors");
-// const bodyParser = require('body-parser');
+    console.log(req.body)
 
-// app.use(bodyParser.urlencoded({extended:true}));
-// //extended 옵션의 경우, true일 경우, 객체 형태로 전달된 데이터내에서 또다른 중첩된 객체를 허용한다는 말이며, false인 경우에는 허용하지 않는 의미
-// app.use(bodyParser.json());
-// app.use(cors());
+    var newUserInfo = new UserInfo({ID:req.body.ID, password:req.body.password});
 
-
-// app.post("/register",(req,res,next)=>{
-
-//     console.log(req.body)
+    newUserInfo.save();
     
     
-// })
+})
 
 app.listen(port, ()=>{
     // crypto1.randomBytes(64, (err, buf) => {
@@ -69,7 +77,7 @@ app.listen(port, ()=>{
     // });
 
     crypto1.pbkdf2('alswns123!', 'PN11bE2pZxeEd6GAMppnhj/QGeAWPpFdu8pfA3VdKQDfCY5KhVZg5XHCgnFVTUK7TjXyFAmvskYewc8jzw05jg==', 100000, 64, 'sha512', (err, key) => {
-        console.log(key.toString('base64'));
+        // console.log(key.toString('base64'));
     });
 
     
