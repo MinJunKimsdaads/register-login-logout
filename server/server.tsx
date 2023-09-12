@@ -39,7 +39,7 @@ const userInfo = mongoose.Schema({
     password : 'string',
 });
 
-var UserInfo = mongoose.model('Schema', userInfo);
+var UserInfo = mongoose.model('userInfo', userInfo);
 
 
 // const userInfo = mongoose.Schema({
@@ -58,12 +58,13 @@ var UserInfo = mongoose.model('Schema', userInfo);
 
 app.post("/register",(req,res,next)=>{
 
-    UserInfo.find({ID: 'admin'}).then((docs) => {
-        console.log(docs); //아이디 중복 확인
-    })
-    var newUserInfo = new UserInfo({ID:req.body.ID, password:req.body.password});
+    console.log(req.body.ID); //아이디 중복 확인
 
-    newUserInfo.save(); 
+    const ttt = UserInfo.findOne();
+    console.log(ttt._id);
+    // var newUserInfo = new UserInfo({ID:req.body.ID, password:req.body.password});
+
+    // newUserInfo.save(); 
 })
 
 /////////////회원가입/////////////
