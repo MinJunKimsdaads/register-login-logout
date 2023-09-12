@@ -53,20 +53,20 @@ var UserInfo = mongoose.model('Schema', userInfo);
 //     console.log(docs); //아이디 중복 확인
 // })
 
-// var newUserInfo = new UserInfo({ID:'Hong Gil Dong', password:'서울시 강남구 논현동'});
 
-// newUserInfo.save();
+/////////////회원가입/////////////
 
 app.post("/register",(req,res,next)=>{
 
-    console.log(req.body)
-
+    UserInfo.find({ID: 'admin'}).then((docs) => {
+        console.log(docs); //아이디 중복 확인
+    })
     var newUserInfo = new UserInfo({ID:req.body.ID, password:req.body.password});
 
-    newUserInfo.save();
-    
-    
+    newUserInfo.save(); 
 })
+
+/////////////회원가입/////////////
 
 app.listen(port, ()=>{
     // crypto1.randomBytes(64, (err, buf) => {
