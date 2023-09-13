@@ -5,3 +5,7 @@
 4) cors //자동으로  access-control-allow-origin 추가
 5) body-parser //데이터 중에서 필요하 body부분만 
 
+# Plan
+1. 로그인, 회원가입 프론트단
+2. 로그인, 회원가입 정보 서버 전송
+3. 백단에서 저장, 제거, 중복 처리
