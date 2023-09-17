@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Register from "./component/Register";
+import './App.scss';
 
 function App() {
   // const [id, setId] = useState('');

@@ -1,0 +1,15 @@
+$breakPoint-mobile:400px;
+$breakPoint-pc:401px;
+
+@mixin btnStyle{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #2D68FF;
+    color: white;
+    padding: 0 22px;
+}
+
+@mixin inputStyle{
+
+}
