@@ -1,3 +1,56 @@
-* {
-    color: gray;
+@import './variables.scss';
+
+.loginWrap{
+    padding: 20px;
+    position: relative;
+    top: 10%;
+
+    .titleBox {
+        margin-bottom: 15px;
+
+        .title{
+            font-size: 22px;
+            font-weight: bold;
+        }
+    }
+
+    .inputBox {
+        width: 100%;
+        margin-bottom: 15px;
+
+        .inputTitle {
+            margin-bottom: 10px;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        input {
+            @include inputStyle;
+            &:focus{
+                background-color: #ddd;
+                outline: none;
+            }
+        }
+    }
+
+    .btnBox {
+        display: flex;
+        justify-content: center;
+
+        .btn1{
+            @include btnStyle;
+            background-color: $btnColor2;
+            margin-bottom: 15px;
+        }
+
+        .btn2{
+            @include btnStyle;
+            background-color: $btnColor1;
+        }
+    }
 }
+
+
+
+
+

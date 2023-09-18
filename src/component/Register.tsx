@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
+import styles from '../style/Register.module.scss';
 
 function Register(){
     const initialInfo = {
@@ -42,21 +43,24 @@ function Register(){
     }
     
     return(
-        <div>
-            <div>
-                <div>아이디:</div>
+        <div className={styles.registerWrap}>
+            <div className={styles.titleBox}>
+                <span className={styles.title}>JUST RIGHT</span>
+            </div>
+            <div className={styles.inputBox}>
+                <div className={styles.inputTitle}>ID:</div>
                 <input name='ID' value={info.ID} onChange={onChangeHandler}></input>
             </div>
-            <div>
-                <div>패스워드:</div>
+            <div className={styles.inputBox}>
+                <div className={styles.inputTitle}>Password:</div>
                 <input type='password' name='password' value={info.password} onChange={onChangeHandler}></input>
             </div>
-            <div>
-                <div>패스워드 확인:</div>
+            <div className={styles.inputBox}>
+                <div className={styles.inputTitle}>Confirm Password:</div>
                 <input type='password' name='passwordConfirm' value={info.passwordConfirm} onChange={onChangeHandler}></input>
             </div>
-            <div>
-                <span onClick={onSubmitHandler}>가입</span>
+            <div className={styles.btnBox}>
+                <span className={styles.btn} onClick={onSubmitHandler}>회원가입</span>
             </div>
         </div>
     )
