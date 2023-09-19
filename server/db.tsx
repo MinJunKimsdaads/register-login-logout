@@ -3,10 +3,10 @@
 const mongoose = require('mongoose');
 
 const connect = () => {
-    console.log(process.env.React_APP_DATABASE)
+    console.log(process.env.DATABASE);
     mongoose
     .connect(
-        process.env.React_APP_DATABASE
+        process.env.DATABASE
     ).then(()=>{
         console.log('mongodb connected')
     })

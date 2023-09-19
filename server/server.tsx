@@ -6,6 +6,8 @@ const db = require('./db.tsx');
 const cors = require("cors");
 const bodyParser = require('body-parser');
 
+const env= require("dotenv").config({ path: ".env" })
+
 app.use(bodyParser.urlencoded({extended:true}));
 //extended 옵션의 경우, true일 경우, 객체 형태로 전달된 데이터내에서 또다른 중첩된 객체를 허용한다는 말이며, false인 경우에는 허용하지 않는 의미
 app.use(bodyParser.json());
@@ -14,7 +16,7 @@ app.use(cors());
 /////////////회원가입/////////////
 
 app.post("/register",(req,res,next)=>{
-    
+
 })
 
 /////////////회원가입/////////////
