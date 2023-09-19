@@ -1,0 +1,26 @@
+//조회 -> 아이디 중복 체크 후 저장
+//패스워드 암호화 필요
+const mongoose = require('mongoose');
+
+const connect = () => {
+    console.log(process.env.React_APP_DATABASE)
+    mongoose
+    .connect(
+        process.env.React_APP_DATABASE
+    ).then(()=>{
+        console.log('mongodb connected')
+    })
+    .catch((err)=>{
+        console.log("error:" + err);
+    })
+}
+
+
+// const userInfo = new mongoose.Schema({
+//     ID : 'string',
+//     password : 'string',
+// });
+
+// var UserInfo = mongoose.model('userInfo', userInfo);
+
+module.exports = connect;
