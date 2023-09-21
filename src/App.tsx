@@ -6,7 +6,7 @@ import AdminChatting from "./component/AdminChatting";
 import './App.scss';
 
 function App() {
-  console.log(process.env.REACT_APP_DATABASE);
+  // console.log(process.env.REACT_APP_DATABASE);
   return (
     <div className="App">
       {/* <Register></Register> */}

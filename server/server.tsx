@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const port = 3001;
+const login = require('./login.tsx');
 const db = require('./db.tsx');
 
 const cors = require("cors");
@@ -13,6 +14,14 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
 app.use(cors());
 
+/////////////로그인/////////////
+
+app.post("/login",(req,res,next)=>{
+    console.log(login);
+})
+
+/////////////로그인/////////////
+
 /////////////회원가입/////////////
 
 app.post("/register",(req,res,next)=>{
@@ -22,7 +31,7 @@ app.post("/register",(req,res,next)=>{
 /////////////회원가입/////////////
 
 app.listen(port, ()=>{
-    db();
+    // db();
 })
 
 //1. 서버가 패스워드를 받아서 64자리 salt생성

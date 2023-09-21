@@ -3,7 +3,7 @@
 const mongoose = require('mongoose');
 
 const connect = () => {
-    console.log(process.env.DATABASE);
+    // console.log(process.env.DATABASE);
     mongoose
     .connect(
         process.env.DATABASE
@@ -14,13 +14,5 @@ const connect = () => {
         console.log("error:" + err);
     })
 }
-
-
-// const userInfo = new mongoose.Schema({
-//     ID : 'string',
-//     password : 'string',
-// });
-
-// var UserInfo = mongoose.model('userInfo', userInfo);
 
 module.exports = connect;
