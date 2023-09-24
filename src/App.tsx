@@ -9,10 +9,10 @@ function App() {
   // console.log(process.env.REACT_APP_DATABASE);
   return (
     <div className="App">
-      {/* <Register></Register> */}
+      <Register></Register>
       {/* <Login></Login> */}
       {/* <Chatting></Chatting> */}
-      <AdminChatting></AdminChatting>
+      {/* <AdminChatting></AdminChatting> */}
     </div>
   );
 }
