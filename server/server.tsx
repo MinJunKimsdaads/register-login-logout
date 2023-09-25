@@ -1,8 +1,9 @@
 const express = require('express');
 const app = express();
 const port = 3001;
+const register = require('./register.tsx');
 const login = require('./login.tsx');
-const db = require('./db.tsx');
+// const db = require('./db.tsx');
 
 const cors = require("cors");
 const bodyParser = require('body-parser');
@@ -25,6 +26,10 @@ app.post("/login",(req,res,next)=>{
 /////////////회원가입/////////////
 
 app.post("/register",(req,res,next)=>{
+    // register(req.body);
+    const registerState = register(req.body);
+
+    res.send(registerState);
 
 })
 

@@ -24,25 +24,6 @@ function Register(){
         flag:false,
     });
 
-    //아이디 유효성
-    const validationInfoID = (id:string) => {
-        const emp = /\s/g;
-        const regID = /^[a-z0-9]{6,19}$/g;
-        
-        if(emp.test(id)){
-            setValMsg({code:msgCode.code2,flag:false});
-        }else{
-            setValMsg({code:'',flag:true});
-        }
-
-        // if(!regExp.test(id)){
-        //     setValMsg({...valMsg,code:msgCode.code1,flag:false});
-        //     // alert(valMsg.code);
-        // }else{
-        //     setValMsg({...valMsg,code:'',flag:true});
-        // }
-    }
-
     // const validationInfoPassword = (password:string, passwordConfirm:string) => {
     //     const regExp = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
 
@@ -67,15 +48,47 @@ function Register(){
     }
 
     const onSubmitHandler = () => {
-        validationInfoID(info.ID);
-
         const emp = /\s/g;
         const regID = /^[a-z0-9]{6,19}$/g;
-        
-        if(valMsg.flag){
-            // axios.post('http://localhost:3001/register/',info);
-            alert('success');
+        const regPassword = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
+
+        if(!regID.test(info.ID)){
+            alert(msgCode.code1);
+            return false;
         }
+
+        if(emp.test(info.ID)){
+            alert(msgCode.code2);
+            return false;
+        }
+
+        if(!regPassword.test(info.password)){
+            alert(msgCode.code4);
+            return false;
+        }
+
+        if(emp.test(info.password)){
+            alert(msgCode.code3);
+            return false;
+        }
+
+        if(info.password !==  info.passwordConfirm){
+            alert(msgCode.code5);
+            return false;
+        }
+
+       axios.post('http://localhost:3001/register/',info)
+       .then((res)=>{
+            console.log(res.data);
+            if(res.data.code == "IDduplication"){
+                alert(res.data.msg);
+                setInfo({...info,ID:''});
+            }
+
+            if(res.data.code == "success"){
+                alert(res.data.msg);
+            }
+       });
     }
     
     return(
