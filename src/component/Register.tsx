@@ -24,71 +24,53 @@ function Register(){
         flag:false,
     });
 
-    // const validationInfoPassword = (password:string, passwordConfirm:string) => {
-    //     const regExp = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
-
-    //     if(!regExp.test(password)){
-    //         setValMsg("비밀번호는 8자 이상이어야 하며, 숫자/대문자/소문자/특수문자를 모두 포함해야 합니다.");
-    //         return false;
-    //        }else{
-    //         if(password == passwordConfirm){
-    //             setValMsg("비밀번호 확인과 서로 다릅니다.");
-    //             return false;
-    //         }else{
-    //             return true;
-    //         }
-    //         setValMsg("");
-    //         return true;
-    //        }
-    // }
-    
     const onChangeHandler = (e:any) => {
         const {value, name:name} = e.target;
         setInfo({...info,[name]:value});
     }
 
     const onSubmitHandler = () => {
-        // const emp = /\s/g;
-        // const regID = /^[a-z0-9]{6,19}$/g;
-        // const regPassword = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
+        const emp = /\s/g;
+        const regID = /^[a-z0-9]{6,19}$/g;
+        const regPassword = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
 
-        // if(!regID.test(info.ID)){
-        //     alert(msgCode.code1);
-        //     return false;
-        // }
+        if(!regID.test(info.ID)){
+            alert(msgCode.code1);
+            return false;
+        }
 
-        // if(emp.test(info.ID)){
-        //     alert(msgCode.code2);
-        //     return false;
-        // }
+        if(emp.test(info.ID)){
+            alert(msgCode.code2);
+            return false;
+        }
 
-        // if(!regPassword.test(info.password)){
-        //     alert(msgCode.code4);
-        //     return false;
-        // }
+        if(!regPassword.test(info.password)){
+            alert(msgCode.code4);
+            return false;
+        }
 
-        // if(emp.test(info.password)){
-        //     alert(msgCode.code3);
-        //     return false;
-        // }
+        if(emp.test(info.password)){
+            alert(msgCode.code3);
+            return false;
+        }
 
-        // if(info.password !==  info.passwordConfirm){
-        //     alert(msgCode.code5);
-        //     return false;
-        // }
+        if(info.password !==  info.passwordConfirm){
+            alert(msgCode.code5);
+            return false;
+        }
 
-       axios.get('http://localhost:3001/chat-list')
-    //    .then((res)=>{
-    //         console.log(res.data);
-    //         if(res.data.code == "IDduplication"){
-    //             alert(res.data.msg);
-    //             setInfo({...info,ID:''});
-    //         }
+       axios.post('http://localhost:3001/register',info)
+       .then((res)=>{
+            // console.log(res.data);
+            if(res.data.code == "IDduplication"){
+                alert(res.data.msg);
+                setInfo({...info,ID:''});
+            }
 
-    //         if(res.data.code == "success"){
-    //             alert(res.data.msg);
-    //         }
-    //    });
+            if(res.data.code == "success"){
+                alert(res.data.msg);
+            }
+       });
     }
     
     return(

@@ -1,18 +1,28 @@
 const sql = require('./db.tsx');
 
 //중복 아이디 조회 select
-const getDupliID = (id) => {
-  sql.query(`SELECT * FROM user_info WHERE ID = ${id}`,(error, results, fields)=>{
+const getDupliID = async (info) => {
+  try{
+    const [results] = await sql.query(`SELECT * FROM user_info WHERE id = '${info.ID}'`);
+    if(results.length > 0){
+      return false;
+    }else{
+      return true;
+    }
+  }catch(e){
+    throw e;
+  }
 
-  })
 }
-// "SELECT * FROM user_info WHERE ID = id"
 
 //회원가입 insert
-const createUser = (param) => {
-  sql.query(`INSERT INTO user_info (ID,PASSWORD,DATE) VALUES ?`,param,(error, results, fields)=>{
-    
-  })
+const createUser = async (info) => {
+  try{
+    const [results] = await sql.query(`INSERT INTO user_info (id,password,regidate) VALUE ('${info.ID}','${info.password}',NOW())`);
+    console.log(results);
+  }catch(e){
+    throw e;
+  }
 }
   // "INSERT INTO user_info "
 
@@ -49,6 +59,7 @@ const getChattList = (param) => {
 // "SELECT * FROM user_chatting WHERE ID = id"
   
 
-// module.exports = {
-  
-// }
+module.exports = {
+  getDupliID : getDupliID,
+  createUser : createUser,
+}
