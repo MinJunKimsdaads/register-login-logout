@@ -1,65 +1,109 @@
 const sql = require('./db.tsx');
+const crypto = require('crypto');
 
-//중복 아이디 조회 select
-const getDupliID = async (info) => {
+//중복 아이디 조회
+const getDupliID = async(info) => {
   try{
     const [results] = await sql.query(`SELECT * FROM user_info WHERE id = '${info.ID}'`);
     if(results.length > 0){
+      sql.release();
       return false;
     }else{
+      sql.release();
       return true;
     }
   }catch(e){
-    throw e;
+    alert(e);
   }
-
 }
 
-//회원가입 insert
-const createUser = async (info) => {
+//salt 생성
+const createSalt = async () => {
   try{
-    const [results] = await sql.query(`INSERT INTO user_info (id,password,regidate) VALUE ('${info.ID}','${info.password}',NOW())`);
-    console.log(results);
+      const salt = await crypto.randomBytes(64);
+      return salt.toString('base64');
   }catch(e){
-    throw e;
+      alert(e);
+  }    
+}
+
+//암호화
+const createPassword = async (password,salt) => {
+  try{
+      const key = await crypto.pbkdf2(password, salt, 100000, 64, 'sha512');
+      return key.toString('base64');
+  }catch(e){
+      alert(e);
+  }   
+}
+
+//회원가입
+const createUser = async(info) => {
+  try{
+    createSalt().then(async(result)=>{
+        await sql.query(`INSERT INTO user_info (id,key) VALUE ('${info.ID}','${result}')`);
+
+        createPassword(info.password,result).then(async(result)=>{
+          await sql.query(`INSERT INTO user_info (id,password,regidate) VALUE ('${info.ID}','${result}',NOW())`);
+        })
+    });
+    sql.release();
+  }catch(e){
+    alert(e);
   }
 }
-  // "INSERT INTO user_info "
 
-//로그인 select
-  const getLogin = (id) => {
-    sql.query(`SELECT * FROM user_info WHERE ID = ${id}`,(error, results, fields)=>{
-
-    })
+//로그인
+  const getLogin = async(info) => {
+    try{
+      const [results] = await sql.query(`SELECT * FROM user_info WHERE ID = ${info.ID}`);
+      if(results.length > 0){
+        sql.release();
+        return true;
+      }else{
+        sql.release();
+        return false;
+      }
+    }catch(e){
+      alert(e);
+    }
   }
-// "SELECT * FROM user_info WHERE ID = id"
 
-//채팅 insert
-  const createChatt = (param) => {
-    sql.query(`INSERT INTO user_info (ID, DES) VALUES ?`,param,(error, results, fields)=>{
-    
-    })
+//채팅 등록
+  const createChatt = async(param) => {
+    try{
+      await sql.query(`INSERT INTO user_chat (id,des,regidate) VALUES ('${param.ID}','${param.des}',NOW())`);
+      sql.release();
+    }catch(e){
+      alert(e);
+    }
   }
-  // "INSERT INTO user_chatting "
   
-//채팅 유저 조회 select
-  const getChattUser = (param) => {
-    sql.query(`INSERT INTO user_info (ID, DES) VALUES ?`,param,(error, results, fields)=>{
-    
-    })
+//채팅 유저 조회
+  const getChattUser = async() => {
+    try{
+      await sql.query(`SELECT DISTINCT id, read, writedate FROM user_chat ORDER BY num desc LIMIT 1`);
+      sql.release();
+    }catch(e){
+      alert(e);
+    }
   }
-// "SELECT * FROM user_chatting WHERE ID = id"
 
-//채팅 유저 조회 select
-const getChattList = (param) => {
-  sql.query(`INSERT INTO user_info (ID, DES) VALUES ?`,param,(error, results, fields)=>{
-  
-  })
+//채팅 목록 조회
+const getChattList = async(param) => {
+  try{
+    const [results] = await sql.query(`SELECT id, read, writedate FROM user_chat WHERE id = '${param.ID}' ORDER BY num desc`);
+    sql.release();
+  }catch(e){
+    alert(e);
+  }
 }
-// "SELECT * FROM user_chatting WHERE ID = id"
-  
 
 module.exports = {
   getDupliID : getDupliID,
   createUser : createUser,
+  getLogin : getLogin,
+  createChatt : createChatt,
+  getChattUser : getChattUser,
+  getChattList : getChattList,
 }
