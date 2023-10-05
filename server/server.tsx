@@ -4,6 +4,8 @@ const port = 3001;
 const cors = require("cors");
 const bodyParser = require('body-parser');
 
+const auth = require('./models/auth.tsx');
+
 // // const env= require("dotenv").config({ path: ".env" })
 
 app.use(bodyParser.urlencoded({extended:true}));
@@ -13,17 +15,15 @@ app.use(cors());
 
 require("./routes/routes.tsx")(app);
 
-// /////////////회원가입/////////////
-
-// app.post("/register",(req,res,next)=>{
-//     // // register(req.body);
-//     // const registerState = register(req.body);
-//     // res.send(registerState);
-// })
-
-/////////////회원가입/////////////
-
 app.listen(port, ()=>{
     console.log('연결');
+
+    auth.createToken({
+        type: "JWT",
+        nickname: 'test1',
+        profile: 'test2',
+    }).then((result)=>{
+        console.log(result);
+    })
 })
 

@@ -62,12 +62,12 @@ function Register(){
        axios.post('http://localhost:3001/register',info)
        .then((res)=>{
             // console.log(res.data);
-            if(res.data.code == "IDduplication"){
+            if(res.data.code == "01"){
                 alert(res.data.msg);
                 setInfo({...info,ID:''});
             }
 
-            if(res.data.code == "success"){
+            if(res.data.code == "02"){
                 alert(res.data.msg);
             }
        });
