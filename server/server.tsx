@@ -20,10 +20,17 @@ app.listen(port, ()=>{
 
     auth.createToken({
         type: "JWT",
-        nickname: 'test1',
-        profile: 'test2',
+        id: 'test1',
+        regidate: 'test2',
     }).then((result)=>{
-        console.log(result);
+        auth.verifyToken('dd').then((result1)=>{
+            console.log(result1);
+            if(result1.id){
+                console.log('검증')
+            }else{
+                console.log(result1.id)
+            }
+        })
     })
 })
 

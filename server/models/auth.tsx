@@ -24,10 +24,20 @@ const createPassword = async (password,salt) => {
 //JWT 토큰 생성
 const createToken = async(payload) => {
     try{
-        const token = await jwt.sign(payload,'secret-key',{expiresIn: '7d'});
+        const token = await jwt.sign(payload,'secret-key',{expiresIn: '3d'});
         return token;
     }catch(e){
         console.log(e);
+    }
+}
+
+//JWT 토큰 검증
+const verifyToken = async(token) => {
+    try{
+        const verify = await jwt.verify(token, 'secret-key');
+        return verify;
+    }catch(e){
+        return e;
     }
 }
 
@@ -35,4 +45,5 @@ module.exports = {
     createSalt : createSalt,
     createPassword : createPassword,
     createToken : createToken,
+    verifyToken : verifyToken,
 }
