@@ -27,7 +27,6 @@ const createUser = async(info) => {
           await sql.query(`INSERT INTO user_info (id,password,regidate) VALUE ('${info.ID}','${result}',NOW())`);
         })
     });
-    
     sql.release();
   }catch(e){
     alert(e);
@@ -41,8 +40,14 @@ const createUser = async(info) => {
       auth.createPassword(info.password,results.key).then(async(result)=>{
         const [results] = await sql.query(`SELECT * FROM user_info WHERE id = ${info.ID} AND password = ${result}`);
         if(results.length > 0){
-          sql.release();
-          return true;
+          auth.createToken({
+            type: "JWT",
+            id: info.ID,
+            password: info.password,
+          }).then((result)=>{
+            sql.release();
+            return result;
+          })
         }else{
           sql.release();
           return false;

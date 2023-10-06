@@ -17,7 +17,9 @@ function Login(){
     }
 
     const onSubmitHandler = () => {
-        axios.post('http://localhost:3001/login/',info);
+        axios.post('http://localhost:3001/login',info,{ withCredentials: true }).then((result)=>{
+            console.log(result);
+        });
     }
     
     return(
@@ -31,7 +33,7 @@ function Login(){
             </div>
             <div className={styles.inputBox}>
                 <div className={styles.inputTitle}>패스워드:</div>
-                <input name='password' value={info.password} onChange={onChangeHandler}></input>
+                <input name='password' type='password' value={info.password} onChange={onChangeHandler}></input>
             </div>
             <div className={styles.btnBox}>
                 <span className={styles.btn1} onClick={onSubmitHandler}>로그인</span>
