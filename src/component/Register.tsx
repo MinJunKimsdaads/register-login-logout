@@ -69,6 +69,7 @@ function Register(){
 
             if(res.data.code == "02"){
                 alert(res.data.msg);
+                
             }
        });
     }

@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import styles from '../style/Login.module.scss';
 
 function Login(){
@@ -39,7 +40,7 @@ function Login(){
                 <span className={styles.btn1} onClick={onSubmitHandler}>로그인</span>
             </div>
             <div className={styles.btnBox}>
-                <span className={styles.btn2}>회원가입</span>
+                <Link to={`/register`} className={styles.btn2}>회원가입</Link>
             </div>
         </div>
     )

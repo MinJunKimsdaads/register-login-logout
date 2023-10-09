@@ -24,19 +24,10 @@ const Msg = {
 
 module.exports = (app) => {
     app.post('/',(req,res)=>{
-        // const login =  sql.getLogin(req.body).then((result)=>{
-        //     if(re){
-                
-        //     }
-        // })
-
-        // console.log(req.body);
         if (req.cookies) { 
             console.log(req.cookies) // { mycookie: 'test'}
-        
         }else{ // 클라이언트에 저장된 쿠키가 없다면
             // 쿠키 쓰기
-            // 'Set-Cookie': `name=${encodeURIComponent(name)}; Expires=${expires.toGMTString()}; HttpOnly; Path=/`,
             res.cookie('name', 'test', { 
                 expires: new Date(),
                 httpOnly: true,
@@ -47,6 +38,7 @@ module.exports = (app) => {
 
     app.post('/register',(req,res)=>{
         const dupliID = sql.getDupliID(req.body).then((result)=>{
+            // console.log(result);
             if(!result){
                 res.send(Msg.flag1);
                 return false;
@@ -60,47 +52,6 @@ module.exports = (app) => {
     })
 
     app.post('/login',(req,res)=>{
-        // const login = sql.getLogin(req.body).then((result)=>{
-        //     if(!result){
-        //         res.send(Msg.flag1);
-        //         return false;
-        //     }else{
-        //         const reist = sql.createUser(req.body).then((result)=>{
-        //             console.log(result);
-        //         });
-        //     }
-        // }) 
-
-        // console.log(req.body);
-
-        // auth.createToken({
-        //     type: "JWT",
-        //     id: req.body.ID,
-        //     password: req.body.password,
-        //   }).then((result)=>{
-        //     console.log(result);
-        //     // console.log(res);
-        //     res.cookie('token',result);
-        //     // res.redirect('/login');
-        //   })
-        // if (req.cookies) { 
-        //     console.log(req.cookies) // { mycookie: 'test'}
-        //     res.cookie('name', 'test', { 
-        //         expires: new Date(),
-        //         httpOnly: true,
-        //         path: '/',
-        //     })
-        
-        // }else{ // 클라이언트에 저장된 쿠키가 없다면
-        //     // 쿠키 쓰기
-        //     // 'Set-Cookie': `name=${encodeURIComponent(name)}; Expires=${expires.toGMTString()}; HttpOnly; Path=/`,
-        //     res.cookie('name', 'test', { 
-        //         expires: new Date(),
-        //         httpOnly: true,
-        //         path: '/',
-        //     })
-        // }
-
         res.cookie('name', 'test', { 
             expires: new Date(),
             httpOnly: true,

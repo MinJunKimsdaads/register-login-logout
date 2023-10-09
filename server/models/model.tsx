@@ -6,14 +6,12 @@ const getDupliID = async(info) => {
   try{
     const [results] = await sql.query(`SELECT * FROM user_info WHERE id = '${info.ID}'`);
     if(results.length > 0){
-      sql.release();
       return false;
     }else{
-      sql.release();
       return true;
     }
   }catch(e){
-    alert(e);
+    console.log(e);
   }
 }
 
@@ -21,15 +19,14 @@ const getDupliID = async(info) => {
 const createUser = async(info) => {
   try{
     auth.createSalt().then(async(result)=>{
-        await sql.query(`INSERT INTO user_id_key (id,key) VALUE ('${info.ID}','${result}')`);
-
-        auth.createPassword(info.password,result).then(async(result)=>{
+        await sql.query(`INSERT INTO user_id_key (id,salt) VALUE ("${info.ID}","${result}")`);
+        
+        await auth.createPassword(info.password,result).then(async(result)=>{
           await sql.query(`INSERT INTO user_info (id,password,regidate) VALUE ('${info.ID}','${result}',NOW())`);
         })
     });
-    sql.release();
   }catch(e){
-    alert(e);
+    console.log(e);
   }
 }
 
@@ -45,16 +42,14 @@ const createUser = async(info) => {
             id: info.ID,
             password: info.password,
           }).then((result)=>{
-            sql.release();
             return result;
           })
         }else{
-          sql.release();
           return false;
         }
       })
     }catch(e){
-      alert(e);
+      console.log(e);
     }
   }
 
@@ -62,9 +57,8 @@ const createUser = async(info) => {
   const createChatt = async(param) => {
     try{
       await sql.query(`INSERT INTO user_chat (id,des,regidate) VALUES ('${param.ID}','${param.des}',NOW())`);
-      sql.release();
     }catch(e){
-      alert(e);
+      console.log(e);
     }
   }
   
@@ -72,9 +66,8 @@ const createUser = async(info) => {
   const getChattUser = async() => {
     try{
       await sql.query(`SELECT DISTINCT id, read, writedate FROM user_chat ORDER BY num desc LIMIT 1`);
-      sql.release();
     }catch(e){
-      alert(e);
+      console.log(e);
     }
   }
 
@@ -82,9 +75,8 @@ const createUser = async(info) => {
 const getChattList = async(param) => {
   try{
     const [results] = await sql.query(`SELECT id, read, writedate FROM user_chat WHERE id = '${param.ID}' ORDER BY num desc`);
-    sql.release();
   }catch(e){
-    alert(e);
+    console.log(e);
   }
 }
 

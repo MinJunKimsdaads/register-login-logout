@@ -1,23 +1,24 @@
-const crypto = require('crypto');
+const crypto1 = require('crypto');
 const jwt = require('jsonwebtoken');
 
 //salt 생성
 const createSalt = async () => {
     try{
-        const salt = await crypto.randomBytes(64);
+        const salt = await crypto1.randomBytes(64);
         return salt.toString('base64');
     }catch(e){
-        alert(e);
+        console.log(e);
     }    
   }
 
 //암호화
 const createPassword = async (password,salt) => {
     try{
-        const key = await crypto.pbkdf2(password, salt, 100000, 64, 'sha512');
-        return key.toString('base64');
+        await crypto1.pbkdf2(password, salt, 100000, 64, 'sha512',(err,key)=>{
+            return key.toString('base64');
+        });
     }catch(e){
-        alert(e);
+        console.log(e);
     }   
 }
 
