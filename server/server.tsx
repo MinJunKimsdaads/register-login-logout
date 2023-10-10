@@ -13,7 +13,7 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.use(cookieParser());
 //extended 옵션의 경우, true일 경우, 객체 형태로 전달된 데이터내에서 또다른 중첩된 객체를 허용한다는 말이며, false인 경우에는 허용하지 않는 의미
 app.use(bodyParser.json());
-app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
+app.use(cors({ credentials: true, origin: "*" }));
 
 // app.use((req,res)=>{
 //     res.setHeader('Access-Control-Allow-origin', '*'); // 모든 출처(orogin)을 허용
