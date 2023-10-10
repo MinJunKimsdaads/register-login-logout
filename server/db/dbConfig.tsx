@@ -1,7 +1,8 @@
 const env = require("dotenv").config({ path: ".env" });
 module.exports = {
-    host     : 'localhost',
+    host     : '127.0.0.1',
     user     : 'root',
     password : 'alswns123!A',
-    database : 'justright'
+    database : 'justright',
+    port: '3306',
 }
