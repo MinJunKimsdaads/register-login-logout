@@ -1,8 +1,10 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import styles from '../style/Register.module.scss';
 
 function Register(){
+    const navigate = useNavigate();
     const initialInfo = {
         ID:'',
         password:'',
@@ -18,11 +20,6 @@ function Register(){
     }
 
     const [info, setInfo] = useState(initialInfo);
-
-    const [valMsg, setValMsg] = useState({
-        code:'',
-        flag:false,
-    });
 
     const onChangeHandler = (e:any) => {
         const {value, name:name} = e.target;
@@ -69,6 +66,7 @@ function Register(){
 
             if(res.data.code == "02"){
                 alert(res.data.msg);
+                navigate("/");
                 
             }
        });
