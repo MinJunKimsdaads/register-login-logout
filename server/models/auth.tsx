@@ -25,7 +25,7 @@ const createPassword = async (password,salt) => {
 //JWT 토큰 생성
 const createToken = async(payload) => {
     try{
-        const token = await jwt.sign(payload,process.env.SECRET_KEY,{expiresIn: '3d'});
+        const token = await jwt.sign(payload,'JUSTRIGHT_secretKey123!A',{expiresIn: '3d'});
         return token;
     }catch(e){
         console.log(e);
