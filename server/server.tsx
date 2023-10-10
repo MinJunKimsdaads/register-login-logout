@@ -7,7 +7,7 @@ const cookieParser = require('cookie-parser');
 
 const auth = require('./models/auth.tsx');
 
-// // const env= require("dotenv").config({ path: ".env" })
+// const env= require("dotenv").config({ path: ".env" });
 
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(cookieParser());
@@ -26,9 +26,9 @@ require("./routes/routes.tsx")(app);
 app.listen(port, ()=>{
     console.log('연결');
 
-    auth.createPassword('alswns123!A','4bXlrnH6u+vl+3AwKU5rqHzx0ZXJaZ33cbLLSbtYPxAV1IfuhS8iJR2vdjZ6iPyZH/JSG3k2Az7mhLRFKYA2Uw==').then((result)=>{
-        console.log(result);
-    });
+    // auth.createPassword('alswns123!A','4bXlrnH6u+vl+3AwKU5rqHzx0ZXJaZ33cbLLSbtYPxAV1IfuhS8iJR2vdjZ6iPyZH/JSG3k2Az7mhLRFKYA2Uw==').then((result)=>{
+    //     console.log(result);
+    // });
 
     // auth.createToken({
     //     type: "JWT",

@@ -23,6 +23,10 @@ const Msg = {
 }
 
 module.exports = (app) => {
+    app.get('/',(req, res)=>{
+        console.log('success');
+    })
+    
     app.post('/',(req,res)=>{
         if (req.cookies) { 
             console.log(req.cookies) // { mycookie: 'test'}
