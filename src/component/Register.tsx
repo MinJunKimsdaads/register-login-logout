@@ -56,7 +56,7 @@ function Register(){
             return false;
         }
 
-       axios.post('http://localhost:3001/register',info)
+       axios.post('https://port-0-register-login-logout-32nq2pc2allvrc81e.sel3.cloudtype.app/register',info)
        .then((res)=>{
             // console.log(res.data);
             if(res.data.code == "01"){
