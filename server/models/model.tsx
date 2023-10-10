@@ -5,6 +5,7 @@ const auth = require('./auth.tsx');
 const getDupliID = async(info) => {
   try{
     const [results] = await sql.query(`SELECT * FROM user_info WHERE id = '${info.ID}'`);
+    console.log(results);
     if(results.length > 0){
       return false;
     }else{
