@@ -24,7 +24,7 @@ app.use(cors({ credentials: true, origin: "*" }));
 require("./routes/routes.tsx")(app);
 
 app.listen(port, ()=>{
-    console.log('연결1');
+    console.log('연결2');
 
     // auth.createPassword('alswns123!A','4bXlrnH6u+vl+3AwKU5rqHzx0ZXJaZ33cbLLSbtYPxAV1IfuhS8iJR2vdjZ6iPyZH/JSG3k2Az7mhLRFKYA2Uw==').then((result)=>{
     //     console.log(result);
