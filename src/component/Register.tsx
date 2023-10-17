@@ -56,7 +56,9 @@ function Register(){
             return false;
         }
 
-       axios.post('https://port-0-register-login-logout-32nq2pc2allvrc81e.sel3.cloudtype.app/register',info)
+        // https://port-0-register-login-logout-32nq2pc2allvrc81e.sel3.cloudtype.app/register
+
+       axios.post('http://localhost:5001/register',info)
        .then((res)=>{
             // console.log(res.data);
             if(res.data.code == "01"){
