@@ -42,7 +42,6 @@ module.exports = (app) => {
 
     app.post('/register',(req,res)=>{
         const dupliID = sql.getDupliID(req.body).then((result)=>{
-            // console.log(result);
             if(!result){
                 res.send(Msg.flag1);
                 return false;

@@ -25,27 +25,5 @@ require("./routes/routes.tsx")(app);
 
 app.listen(port, ()=>{
     console.log('연결4');
-
-    // auth.createPassword('alswns123!A','4bXlrnH6u+vl+3AwKU5rqHzx0ZXJaZ33cbLLSbtYPxAV1IfuhS8iJR2vdjZ6iPyZH/JSG3k2Az7mhLRFKYA2Uw==').then((result)=>{
-    //     console.log(result);
-    // });
-
-    // auth.createToken({
-    //     type: "JWT",
-    //     id: 'test1',
-    //     regidate: 'test2',
-    // }).then((result)=>{
-        
-    //     // auth.verifyToken('dd').then((result1)=>{
-    //     //     console.log(result1);
-    //     //     if(result1.id){
-    //     //         console.log('검증')
-    //     //     }else{
-    //     //         console.log(result1.id)
-    //     //     }
-    //     // })
-    // })
-
-    //subdir01
 })
 
