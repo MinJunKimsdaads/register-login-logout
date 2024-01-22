@@ -56,7 +56,15 @@ function Register(){
             return false;
         }
 
+<<<<<<< HEAD
        axios.post('http://localhost:3001/register',info)
+=======
+        // https://port-0-register-login-logout-32nq2pc2allvrc81e.sel3.cloudtype.app/register
+
+        // http://localhost:5001/register
+
+       axios.post('http://localhost:5001/register',info)
+>>>>>>> fc23810a6149af4bf7e73b560bd8fb51244dcc44
        .then((res)=>{
             // console.log(res.data);
             if(res.data.code == "01"){

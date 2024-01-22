@@ -14,6 +14,10 @@ app.use(cors({ credentials: true, origin: "*" }));
 require("./routes/routes.tsx")(app);
 
 app.listen(port, ()=>{
+<<<<<<< HEAD
     console.log('connect');
+=======
+    console.log('연결4');
+>>>>>>> fc23810a6149af4bf7e73b560bd8fb51244dcc44
 })
 
