@@ -34,25 +34,41 @@ const createUser = async(info) => {
 //로그인
   const getLogin = async(info) => {
     try{
-      const [results] = await sql.query(`SELECT * FROM user_id_key WHERE id = ${info.ID}`);
-      auth.createPassword(info.password,results.key).then(async(result)=>{
-        const [results] = await sql.query(`SELECT * FROM user_info WHERE id = ${info.ID} AND password = ${result}`);
-        if(results.length > 0){
-          auth.createToken({
-            type: "JWT",
-            id: info.ID,
-            password: info.password,
-          }).then((result)=>{
-            return result;
-          })
-        }else{
-          return false;
-        }
+      const JWT = auth.createToken({
+        type: "JWT",
+        id: info.ID,
+        password: info.password,
       })
+
+      return JWT;
+      
     }catch(e){
       console.log(e);
     }
   }
+
+  // const getLogin = async(info) => {
+  //   try{
+  //     const [results] = await sql.query(`SELECT * FROM user_id_key WHERE id = ${info.ID}`);
+  //     auth.createPassword(info.password,results.key).then(async(result)=>{
+  //       const [results] = await sql.query(`SELECT * FROM user_info WHERE id = ${info.ID} AND password = ${result}`);
+  //       if(results.length > 0){
+  //         auth.createToken({
+  //           type: "JWT",
+  //           id: info.ID,
+  //           password: info.password,
+  //         }).then((result)=>{
+  //           return result;
+  //         })
+  //       }else{
+  //         return false;
+  //       }
+  //     })
+  //   }catch(e){
+  //     console.log(e);
+  //   }
+  // }
+
 
 //채팅 등록
   const createChatt = async(param) => {

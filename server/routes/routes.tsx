@@ -1,5 +1,4 @@
 const sql = require("../models/model.tsx");
-const auth = require('../models/auth.tsx');
 const cookieParser = require('cookie-parser');
 
 const registerMsg = {
@@ -50,18 +49,29 @@ module.exports = (app) => {
     })
 
     app.post('/login',(req,res)=>{
-        res.cookie('name', 'test', { 
-            expires: new Date(),
-            httpOnly: true,
-            path: '/',
-            sameSite: 'none',
-            secure: true, // https, ssl 모드에서만
-        })
-        res.send('cookie');
+        // res.cookie('name', 'test', { 
+        //     expires: new Date(),
+        //     httpOnly: true,
+        //     path: '/',
+        //     sameSite: 'none',
+        //     secure: true, // https, ssl 모드에서만
+        // })
+        // res.send('cookie');
+
+        //JWT
+        const JWT = sql.getLogin(req.body).then((result)=>{
+            res.send(result);
+        });
+
+        // res.send(JWT);
+        // console.log(JWT());
+        
     })
 
-    app.get('/chat-history',(req,res)=>{
-        console.log('/chat-history');
+    app.post('/chatting',(req,res)=>{
+        console.log(req.body);
+
+        
     })
 
     app.get('/chat-list',(req,res)=>{

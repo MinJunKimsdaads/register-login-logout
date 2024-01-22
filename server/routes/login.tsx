@@ -7,7 +7,7 @@ const createToken = (payload) => {
                 payload,
                 'secret-key',
                 {
-                    expiresIn: '7d'
+                    expiresIn: '3d'
                 }, (error, token)=>{
                     if(error) reject(error);
                     resolve(token);

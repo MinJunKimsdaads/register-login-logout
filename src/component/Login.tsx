@@ -18,8 +18,8 @@ function Login(){
     }
 
     const onSubmitHandler = () => {
-        axios.post('http://localhost:3001/login',info,{ withCredentials: true }).then((result)=>{
-            console.log(result);
+        axios.post('http://localhost:3001/login',info).then((result)=>{
+            localStorage.setItem('jwtToken', result.data);
         });
     }
     

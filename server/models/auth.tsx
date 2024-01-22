@@ -32,19 +32,19 @@ const createToken = async(payload) => {
     }
 }
 
-//JWT 토큰 검증
-const verifyToken = async(token) => {
-    try{
-        const verify = await jwt.verify(token, 'secret-key');
-        return verify;
-    }catch(e){
-        return e;
-    }
-}
+// //JWT 토큰 검증
+// const verifyToken = async(token) => {
+//     try{
+//         const verify = await jwt.verify(token, 'secret-key');
+//         return verify;
+//     }catch(e){
+//         return e;
+//     }
+// }
 
 module.exports = {
     createSalt : createSalt,
     createPassword : createPassword,
     createToken : createToken,
-    verifyToken : verifyToken,
+    // verifyToken : verifyToken,
 }

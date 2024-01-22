@@ -56,7 +56,7 @@ function Register(){
             return false;
         }
 
-       axios.post('http://localhost:5001/register',info)
+       axios.post('http://localhost:3001/register',info)
        .then((res)=>{
             // console.log(res.data);
             if(res.data.code == "01"){

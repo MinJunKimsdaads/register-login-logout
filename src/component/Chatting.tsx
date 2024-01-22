@@ -1,5 +1,27 @@
+import React from 'react';
+import { useEffect } from "react";
+import axios from "axios";
 import styles from '../style/Chatting.module.scss';
 function Chatting(){  
+    useEffect(()=>{
+        const verifyToken = async () => {
+            const verifyToken = localStorage.getItem('jwtToken');
+
+            if(!verifyToken){
+                console.log('vvv');
+            }else{
+                try{
+                    await axios.post('http://localhost:3001/chatting',verifyToken).then((result)=>{
+                        console.log(result);
+                    }); 
+                }catch(e){
+                    console.log(e);
+                }
+            }
+        }
+
+        verifyToken();
+    })
     return(
         <div className={styles.chattingWrap}>
             <div className={styles.titleBox}>
