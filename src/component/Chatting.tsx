@@ -1,26 +1,19 @@
 import React from 'react';
 import { useEffect } from "react";
+import { useNavigate } from 'react-router-dom';
+import { verifyToken } from '../utils/auth';
 import axios from "axios";
 import styles from '../style/Chatting.module.scss';
+
+
 function Chatting(){  
+    const navigate = useNavigate();
     useEffect(()=>{
-        const verifyToken = async () => {
-            const verifyToken = localStorage.getItem('jwtToken');
-
-            if(!verifyToken){
-                console.log('vvv');
-            }else{
-                try{
-                    await axios.post('http://localhost:3001/chatting',verifyToken).then((result)=>{
-                        console.log(result);
-                    }); 
-                }catch(e){
-                    console.log(e);
-                }
+        const vaildToken = verifyToken('http://localhost:3001/chatting').then((res)=>{
+            if(!res){
+                navigate('/');
             }
-        }
-
-        verifyToken();
+        });
     })
     return(
         <div className={styles.chattingWrap}>

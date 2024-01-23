@@ -33,18 +33,19 @@ const createToken = async(payload) => {
 }
 
 // //JWT 토큰 검증
-// const verifyToken = async(token) => {
-//     try{
-//         const verify = await jwt.verify(token, 'secret-key');
-//         return verify;
-//     }catch(e){
-//         return e;
-//     }
-// }
+const verifyToken = async(token) => {
+    try{
+        const verify = await jwt.verify(token, 'JUSTRIGHT_secretKey123!A');
+        return verify;
+    }catch(e){
+        //검증 실패 시
+        return e;
+    }
+}
 
 module.exports = {
     createSalt : createSalt,
     createPassword : createPassword,
     createToken : createToken,
-    // verifyToken : verifyToken,
+    verifyToken : verifyToken,
 }

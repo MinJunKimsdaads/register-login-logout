@@ -1,9 +1,20 @@
 import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from 'react-router-dom';
+import { verifyToken } from '../utils/auth';
 import { Link } from "react-router-dom";
 import styles from '../style/Login.module.scss';
 
 function Login(){
+    const navigate = useNavigate();
+
+    useEffect(()=>{
+        const vaildToken = verifyToken('http://localhost:3001/').then((res)=>{
+            if(res){
+                navigate('/chatting');
+            }
+        });
+    })
 
     const loginInfo = {
         ID:'',

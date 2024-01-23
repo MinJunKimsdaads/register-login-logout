@@ -1,4 +1,5 @@
 const sql = require("../models/model.tsx");
+const auth = require("../models/auth.tsx");
 const cookieParser = require('cookie-parser');
 
 const registerMsg = {
@@ -22,16 +23,9 @@ const registerMsg = {
 
 module.exports = (app) => {
     app.post('/',(req,res)=>{
-        if (req.cookies) { 
-            console.log(req.cookies); // { mycookie: 'test'}
-        }else{ // 클라이언트에 저장된 쿠키가 없다면
-            // 쿠키 쓰기
-            res.cookie('name', 'test', { 
-                expires: new Date(),
-                httpOnly: true,
-                path: '/',
-            })
-        }
+        auth.verifyToken(req.body.token).then((result)=>{
+            res.send(result);
+        })
     })
 
     app.post('/register',(req,res)=>{
@@ -69,9 +63,10 @@ module.exports = (app) => {
     })
 
     app.post('/chatting',(req,res)=>{
-        console.log(req.body);
 
-        
+        auth.verifyToken(req.body.token).then((result)=>{
+            res.send(result);
+        })
     })
 
     app.get('/chat-list',(req,res)=>{
