@@ -63,7 +63,6 @@ module.exports = (app) => {
     })
 
     app.post('/chatting',(req,res)=>{
-
         auth.verifyToken(req.body.token).then((result)=>{
             res.send(result);
         })

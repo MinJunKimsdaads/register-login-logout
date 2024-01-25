@@ -11,10 +11,21 @@ $vertical-margin: 20px;
 
     .titleBox {
         margin-bottom: 15px;
+        display: flex;
+        justify-content: space-between;
 
-        .title{
+        .title {
             font-size: 22px;
             font-weight: bold;
+        }
+
+        .logout {
+            background-color: black;
+            color: white;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 14px;
+            padding: 3px 5px 3px 5px;
         }
     }
 

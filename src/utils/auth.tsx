@@ -22,3 +22,8 @@ export const verifyToken = async (url:string) => {
         }
     }
 }
+
+//로그아웃
+export const logout = () => {
+    localStorage.removeItem('jwtToken');
+}
