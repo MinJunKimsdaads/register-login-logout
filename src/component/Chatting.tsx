@@ -1,15 +1,21 @@
 import React from 'react';
-import { useEffect } from "react";
-import { useContext } from 'react';
+import { useEffect, useState, useContext } from "react";
 import { useNavigate } from 'react-router-dom';
 import { verifyToken, logout } from '../utils/auth';
 import { DialogContext } from './Dialog';
 import axios from "axios";
+import { io } from 'socket.io-client';
 import styles from '../style/Chatting.module.scss';
 
 
 function Chatting(){  
     const navigate = useNavigate();
+    const socket = io("http://localhost:3001",{
+        
+    })
+    socket.on("receive message",(message)=>{
+        console.log('eeee');
+    })
     const dialog = useContext(DialogContext);
 
     const object = {
@@ -32,6 +38,8 @@ function Chatting(){
         }
     }
 
+    
+
     useEffect(()=>{
         const vaildToken = verifyToken('http://localhost:3001/chatting').then((res)=>{
             if(!res){
@@ -39,6 +47,13 @@ function Chatting(){
             }
         });
     })
+
+    const sendMessage = (e:any) => {
+        e.preventDefault();
+        socket.emit("send message",{
+            msg: 'test',
+        })
+    }
     
     return(
         <div className={styles.chattingWrap}>
@@ -76,10 +91,12 @@ function Chatting(){
                 </div>
             </div>
             <div className={styles.inputBox}>
-                <textarea></textarea>
-                <div className={styles.btnBox}>
-                    <span className={styles.btn}>전송</span>
-                </div>
+                <form>
+                    <textarea></textarea>
+                    <div className={styles.btnBox}>
+                        <button type="submit" className={styles.btn}>전송</button>
+                    </div>
+                </form>
             </div>
         </div>
     )

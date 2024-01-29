@@ -2,6 +2,7 @@ const sql = require("../models/model.tsx");
 const auth = require("../models/auth.tsx");
 const cookieParser = require('cookie-parser');
 
+
 const registerMsg = {
     flag1:{
         code:'01',
@@ -66,6 +67,8 @@ module.exports = (app) => {
         auth.verifyToken(req.body.token).then((result)=>{
             res.send(result);
         })
+
+        
     })
 
     app.get('/chat-list',(req,res)=>{
