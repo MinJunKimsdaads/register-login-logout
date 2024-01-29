@@ -11,10 +11,7 @@ import styles from '../style/Chatting.module.scss';
 function Chatting(){  
     const navigate = useNavigate();
     const socket = io("http://localhost:3001",{
-        
-    })
-    socket.on("receive message",(message)=>{
-        console.log('eeee');
+        rejectUnauthorized: false
     })
     const dialog = useContext(DialogContext);
 
@@ -37,6 +34,32 @@ function Chatting(){
             }
         }
     }
+ ////////////////
+    const initialValue = {
+        msg:"",
+    }
+    const [val, setValue] = useState<any>(initialValue);
+
+    const [msgList, setMsgList] = useState<any[]>([]);
+
+    socket.on("receive message",(message)=>{
+        console.log(message);
+        setMsgList([...msgList,message]);
+    })
+
+    const sendMessage = (e:any) => {
+        e.preventDefault();
+        socket.emit("send message",{
+            msg: val.msg,
+        })
+        setValue(initialValue);
+    }
+
+    const onChange = (e:any) => {
+        const {value, name:name} = e.target;
+        setValue({...val,[name]:value});
+    }
+////////////////
 
     
 
@@ -46,14 +69,8 @@ function Chatting(){
                 navigate('/');
             }
         });
-    })
-
-    const sendMessage = (e:any) => {
-        e.preventDefault();
-        socket.emit("send message",{
-            msg: 'test',
-        })
-    }
+        console.log('vv')
+    },[msgList])
     
     return(
         <div className={styles.chattingWrap}>
@@ -62,37 +79,16 @@ function Chatting(){
                 <span className={styles.logout} onClick={()=>{dialog.createDialogOption(object)}}>로그아웃</span>
             </div>
             <div className={styles.chattingWindow}>
-                <div className={styles.chatBox1}>
-                    내용1dsadsa
-                </div>
-                <div className={styles.chatBox2}>
-                    내용2
-                </div>
-                <div className={styles.chatBox2}>
-                    내용2
-                </div>
-                <div className={styles.chatBox2}>
-                    내용2
-                </div>
-                <div className={styles.chatBox2}>
-                    내용2
-                </div>
-                <div className={styles.chatBox1}>
-                    내용1
-                </div>
-                <div className={styles.chatBox2}>
-                    내용2
-                </div>
-                <div className={styles.chatBox1}>
-                    내용1
-                </div>
-                <div className={styles.chatBox2}>
-                    내용2
-                </div>
+                {msgList.map((item,index) => (
+                    <div key={index} className={styles.chatBox1}>
+                        {item.msg}
+                    </div>
+                ))}
+                
             </div>
             <div className={styles.inputBox}>
-                <form>
-                    <textarea></textarea>
+                <form onSubmit={sendMessage}>
+                    <textarea  onChange={onChange} name="msg"></textarea>
                     <div className={styles.btnBox}>
                         <button type="submit" className={styles.btn}>전송</button>
                     </div>
