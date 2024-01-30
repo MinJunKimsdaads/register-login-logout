@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from '../style/Register.module.scss';
 
@@ -22,7 +22,7 @@ function Register(){
     const [info, setInfo] = useState(initialInfo);
 
     const onChangeHandler = (e:any) => {
-        const {value, name:name} = e.target;
+        const {value, name} = e.target;
         setInfo({...info,[name]:value});
     }
 
@@ -56,18 +56,16 @@ function Register(){
             return false;
         }
 
-       axios.post('http://localhost:3001/register',info)
-       .then((res)=>{
+       axios.post('http://localhost:3001/register',info).then((res)=>{
             // console.log(res.data);
-            if(res.data.code == "01"){
+            if(res.data.code === "01"){
                 alert(res.data.msg);
                 setInfo({...info,ID:''});
             }
 
-            if(res.data.code == "02"){
+            if(res.data.code === "02"){
                 alert(res.data.msg);
                 navigate("/");
-                
             }
        });
     }

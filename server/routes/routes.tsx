@@ -55,6 +55,7 @@ module.exports = (app) => {
 
         //JWT
         const JWT = sql.getLogin(req.body).then((result)=>{
+
             res.send(result);
         });
 
@@ -67,8 +68,6 @@ module.exports = (app) => {
         auth.verifyToken(req.body.token).then((result)=>{
             res.send(result);
         })
-
-        
     })
 
     app.get('/chat-list',(req,res)=>{

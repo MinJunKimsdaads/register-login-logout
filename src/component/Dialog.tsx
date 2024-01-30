@@ -1,6 +1,5 @@
 import { useState, useContext, createContext} from "react";
 import '../style/dialog.css';
-import any from "react/jsx-runtime";
 
 /////////////////////////////////////////////////////////////////////
 //사용법

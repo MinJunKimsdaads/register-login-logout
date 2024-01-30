@@ -4,8 +4,7 @@ const port = 3001;
 const cors = require("cors");
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
-const auth = require('./models/auth.tsx');
-
+// const auth = require('./models/auth.tsx');
 const http = require('http');
 const server = http.createServer(app);
 
@@ -20,9 +19,8 @@ const io = require('socket.io')(server,  { cors: { origin: '*' } });
 
 io.on('connection', (socket) => {
     socket.on('send message',(item)=>{
-            const message = "message : " + item.msg;
-            console.log(message);
-            io.emit("receive message", { msg: item.msg });  //"receive message"라는 이벤트 발생
+            console.log(item);
+            io.emit("receive message", { msg: item.msg, date: item.date, id:item.id });  //"receive message"라는 이벤트 발생
     })
 
     socket.on("disconnect", function () {

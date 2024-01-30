@@ -9,7 +9,7 @@ function Login(){
     const navigate = useNavigate();
 
     useEffect(()=>{
-        const vaildToken = verifyToken('http://localhost:3001/').then((res)=>{
+        verifyToken('http://localhost:3001/').then((res)=>{
             if(res){
                 navigate('/chatting');
             }
@@ -24,7 +24,7 @@ function Login(){
     const [info, setInfo] = useState(loginInfo);
 
     const onChangeHandler = (e:any) => {
-        const {value, name:name} = e.target;
+        const {value, name} = e.target;
         setInfo({...info,[name]:value});
     }
 
