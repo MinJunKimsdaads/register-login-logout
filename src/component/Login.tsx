@@ -4,6 +4,9 @@ import { useNavigate } from 'react-router-dom';
 import { verifyToken } from '../utils/auth';
 import { Link } from "react-router-dom";
 import styles from '../style/Login.module.scss';
+import SocialKakao from "./SocialKakao";
+
+
 
 function Login(){
     const navigate = useNavigate();
@@ -17,6 +20,7 @@ function Login(){
     })
 
     const loginInfo = {
+        platform:'web',
         ID:'',
         password:'',
     }
@@ -49,6 +53,9 @@ function Login(){
             </div>
             <div className={styles.btnBox}>
                 <span className={styles.btn1} onClick={onSubmitHandler}>로그인</span>
+            </div>
+            <div>
+                <SocialKakao></SocialKakao>
             </div>
             <div className={styles.btnBox}>
                 <Link to={`/register`} className={styles.btn2}>회원가입</Link>

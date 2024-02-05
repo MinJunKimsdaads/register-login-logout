@@ -1,6 +1,7 @@
 const sql = require("../models/model.tsx");
 const auth = require("../models/auth.tsx");
 const cookieParser = require('cookie-parser');
+const axios = require("axios");
 
 
 const registerMsg = {
@@ -43,7 +44,7 @@ module.exports = (app) => {
         });
     })
 
-    app.post('/login',(req,res)=>{
+    app.post('/login',async (req,res)=>{
         // res.cookie('name', 'test', { 
         //     expires: new Date(),
         //     httpOnly: true,
@@ -53,11 +54,29 @@ module.exports = (app) => {
         // })
         // res.send('cookie');
 
-        //JWT
-        const JWT = sql.getLogin(req.body).then((result)=>{
+        if(req.body.platform == 'kakao'){
+            // console.log(req.body);
+            const kakaoResponse = await axios.get('https://kapi.kakao.com/v2/user/me', {
+                    headers: {
+                        Authorization: `Bearer ${req.body.ID}`,
+                    },
+                },
+            );
 
-            res.send(result);
-        });
+            const {data} = kakaoResponse;
+            
+            console.log(data);
+
+            // res.send({
+            //     idToken:kakaoResponse.data.id,
+            //     name:kakaoResponse.data.kakao_account.profile.nickname
+            // });
+        }else{
+            //JWT
+            const JWT = sql.getLogin(req.body).then((result)=>{
+                res.send(result);
+            });
+        }
 
         // res.send(JWT);
         // console.log(JWT());
