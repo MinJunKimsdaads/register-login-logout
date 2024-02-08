@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { verifyToken, logout } from '../utils/auth';
-import { DialogContext } from './Dialog';
+import { DialogContext } from '../component/Dialog';
 import styles from '../style/AdminChatting.module.scss';
 
 function AdminChatting(){

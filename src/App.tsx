@@ -1,9 +1,9 @@
 import './App.scss';
 import {Route, Routes} from 'react-router-dom';
-import Register from "./component/Register";
-import Login from "./component/Login";
-import Chatting from "./component/Chatting";
-import AdminChatting from "./component/AdminChatting";
+import Register from './pages/Register';
+import Login from './pages/Login';
+import Chatting from './pages/Chatting';
+import AdminChatting from './pages/AdminChatting';
 
 import { Dialog, DialogProvider } from "./component/Dialog";
 

@@ -37,7 +37,7 @@ const createUser = async(info) => {
       const JWT = auth.createToken({
         type: "JWT",
         id: info.ID,
-        password: info.password,
+        platform:info.platform,
       })
 
       return JWT;
