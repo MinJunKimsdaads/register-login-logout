@@ -49,22 +49,25 @@ function Login(){
                     <div className={styles.titleBox}>
                         <span className={styles.title}>JUST RIGHT</span>
                     </div>
+                    <div className={styles.inputTitle}>Login to your account</div>
                     <div className={styles.inputBox}>
-                        <div className={styles.inputTitle}>아이디:</div>
-                        <input name='ID' value={info.ID} onChange={onChangeHandler}></input>
+                        <input name='ID' placeholder="ID" value={info.ID} onChange={onChangeHandler}></input>
                     </div>
                     <div className={styles.inputBox}>
-                        <div className={styles.inputTitle}>패스워드:</div>
-                        <input name='password' type='password' value={info.password} onChange={onChangeHandler}></input>
+                        <input name='password' placeholder="Password" type='password' value={info.password} onChange={onChangeHandler}></input>
                     </div>
                     <div className={styles.btnBox}>
-                        <span className={styles.btn1} onClick={onSubmitHandler}>로그인</span>
+                        <span className={styles.btn1} onClick={onSubmitHandler}>Sign in</span>
                     </div>
-                    <div>
-                        <SocialKakao></SocialKakao>
+                    <div className={styles.socialLoginBox}>
+                        <div>- Or sign in with - </div>
+                        <div>
+                            <SocialKakao></SocialKakao>
+                        </div>
                     </div>
-                    <div className={styles.btnBox}>
-                        <Link to={`/register`} className={styles.btn2}>회원가입</Link>
+                    <div className={styles.registerBox}>
+                        <span>Don't hava an account?</span>
+                        <Link to={`/register`} className={styles.btn2}>Sign up</Link>
                     </div>
                 </div>
             }

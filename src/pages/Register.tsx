@@ -76,19 +76,16 @@ function Register(){
                 <span className={styles.title}>JUST RIGHT</span>
             </div>
             <div className={styles.inputBox}>
-                <div className={styles.inputTitle}>ID:</div>
-                <input name='ID' value={info.ID} onChange={onChangeHandler}></input>
+                <input name='ID'placeholder="ID" value={info.ID} onChange={onChangeHandler}></input>
             </div>
             <div className={styles.inputBox}>
-                <div className={styles.inputTitle}>Password:</div>
-                <input type='password' name='password' value={info.password} onChange={onChangeHandler}></input>
+                <input type='password' placeholder="Password" name='password' value={info.password} onChange={onChangeHandler}></input>
             </div>
             <div className={styles.inputBox}>
-                <div className={styles.inputTitle}>Confirm Password:</div>
-                <input type='password' name='passwordConfirm' value={info.passwordConfirm} onChange={onChangeHandler}></input>
+                <input type='password' placeholder="Password Confirm" name='passwordConfirm' value={info.passwordConfirm} onChange={onChangeHandler}></input>
             </div>
             <div className={styles.btnBox}>
-                <span className={styles.btn} onClick={onSubmitHandler}>회원가입</span>
+                <span className={styles.btn} onClick={onSubmitHandler}>Sign up</span>
             </div>
         </div>
     )

@@ -1,8 +1,9 @@
 $breakPoint-mobile:400px;
 $breakPoint-pc:401px;
 
+$color:#5375ea;
 $btnColor1:#2D68FF;
-$btnColor2:green;
+$btnColor2:#5375ea;
 
 @mixin btnStyle{
     display: inline-flex;
@@ -14,13 +15,24 @@ $btnColor2:green;
     font-size: 16px;
     font-weight: 500;
     line-height: 20px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    border-radius: 5px;
+    font-weight: 600;
     cursor: pointer;
 }
 
-@mixin inputStyle{
+@mixin desFontStyle{
+    color:gray;
+    font-size: 15px;
+}
 
-    width: calc(100% - 30px);
-    padding: 15px;
+@mixin inputStyle{
+    width: 100%;
+    padding: 17px;
     border: none;
-    background: #f7f7f7;
+    border-radius: 5px;
+    box-sizing: border-box;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    color:gray;
+    font-size: 16px;
 }

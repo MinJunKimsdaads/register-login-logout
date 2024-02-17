@@ -16,13 +16,7 @@
 
     .inputBox {
         width: 100%;
-        margin-bottom: 15px;
-
-        .inputTitle {
-            margin-bottom: 10px;
-            font-size: 18px;
-            font-weight: 600;
-        }
+        margin-bottom: 25px;
 
         input {
             @include inputStyle;
@@ -39,7 +33,9 @@
 
         .btn{
             @include btnStyle;
-            background-color: $btnColor1;
+            width: 100%;
+            background-color: $btnColor2;
+            margin-bottom: 15px;
         }
     }
 }

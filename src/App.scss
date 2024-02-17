@@ -3,6 +3,7 @@
 html, body {
   margin: 0;
   padding: 0;
+  background-color: #c8d0f5;
 }
 
 .App {
@@ -12,8 +13,9 @@ html, body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  border-radius: 15px;
+  border-radius: 50px;
   border: 1px solid #ddd;
+  background-color: white;
 }
 
 @media (max-width: $breakPoint-mobile) {
@@ -25,8 +27,3 @@ html, body {
     border: none !important;
   }
 }
-
-// @media (min-width: 401px) {
-  
-// }
-

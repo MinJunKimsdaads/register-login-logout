@@ -14,15 +14,15 @@
         }
     }
 
+    .inputTitle {
+        margin-bottom: 25px;
+        font-size: 18px;
+        font-weight: 600;
+    }
+
     .inputBox {
         width: 100%;
-        margin-bottom: 15px;
-
-        .inputTitle {
-            margin-bottom: 10px;
-            font-size: 18px;
-            font-weight: 600;
-        }
+        margin-bottom: 25px;
 
         input {
             @include inputStyle;
@@ -39,13 +39,35 @@
 
         .btn1{
             @include btnStyle;
+            width: 100%;
             background-color: $btnColor2;
             margin-bottom: 15px;
         }
+    }
 
+    .socialLoginBox{
+        margin-top: 20px;
+        div{
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            &:first-child{
+                @include desFontStyle;
+            }
+        }
+    }
+
+    .registerBox{
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+        span{
+            @include desFontStyle;
+        }
         .btn2{
-            @include btnStyle;
-            background-color: $btnColor1;
+            margin-left: 5px;
+            color: #5375ea;
+            text-decoration: none;
         }
     }
 }
